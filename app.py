@@ -11,14 +11,8 @@ from PIL import Image
 import io
 import joblib
 
-# Optional: DirectML support for AMD GPU
-try:
-    import torch_directml
-    device = torch_directml.device()
-    HAS_GPU = True
-except ImportError:
-    device = torch.device("cpu")
-    HAS_GPU = False
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+HAS_GPU = torch.cuda.is_available()
 
 SVM_MODEL_PATH = "models/svm_model.joblib"
 

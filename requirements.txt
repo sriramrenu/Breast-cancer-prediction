@@ -5,7 +5,7 @@ scikit-learn
 pandas
 numpy
 torch
-torch-directml
+
 pillow
 python-multipart
 matplotlib
