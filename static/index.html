@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Predict AI | Image Diagnosis</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+
+    <main class="shell">
+        <section class="hero">
+            <div class="eyebrow">SVM Classification Model</div>
+            <h1>Upload a breast ultrasound image and get an instant model prediction.</h1>
+            <p>The frontend sends your image directly to the FastAPI endpoint and renders the trained SVM result, confidence, and ranked alternatives.</p>
+            <div class="hero-metrics">
+                <div class="metric">
+                    <span>Model</span>
+                    <strong>ResNet18 + SVM</strong>
+                </div>
+                <div class="metric">
+                    <span>Classes</span>
+                    <strong>Benign, Malignant, Normal</strong>
+                </div>
+                <div class="metric">
+                    <span>Endpoint</span>
+                    <strong>/predict-image</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="workspace">
+            <article class="panel upload-panel">
+                <div class="panel-head">
+                    <div>
+                        <p class="panel-kicker">Image input</p>
+                        <h2>Drop an ultrasound scan</h2>
+                    </div>
+                    <button id="clear-image-btn" class="ghost-btn" type="button">Reset</button>
+                </div>
+
+                <div class="upload-area" id="upload-area">
+                    <input type="file" id="image-input" hidden accept="image/*">
+                    <div class="upload-copy">
+                        <div class="upload-icon">↗</div>
+                        <h3>Drag and drop a file here</h3>
+                        <p>or click to browse from your device. PNG, JPG, and WEBP work well.</p>
+                    </div>
+                </div>
+
+                <div id="image-preview-container" class="preview-shell hidden">
+                    <img id="image-preview" src="" alt="Uploaded preview">
+                    <div class="preview-meta">
+                        <span id="file-name">No file selected</span>
+                        <span id="file-size">Ready to analyze</span>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button id="analyze-image-btn" class="primary-btn" type="button" disabled>Analyze Image</button>
+                    <p class="hint">The file is sent to the backend model only when you click analyze.</p>
+                </div>
+            </article>
+
+            <article class="panel result-panel">
+                <div class="panel-head">
+                    <div>
+                        <p class="panel-kicker">Model output</p>
+                        <h2>Prediction result</h2>
+                    </div>
+                    <span id="model-badge" class="status-chip">Waiting</span>
+                </div>
+
+                <div id="result-container" class="result-container empty-state">
+                    <div class="empty-visual">AI</div>
+                    <h3>Upload an image to see the result</h3>
+                    <p>The result card will show the predicted label, confidence, and the top three class scores.</p>
+                    <div id="result-message" class="result-message hidden"></div>
+                </div>
+
+                <div id="result-card" class="result-card hidden">
+                    <div class="result-status" id="result-status"></div>
+                    <h3 id="result-text"></h3>
+                    <p id="result-model" class="result-model"></p>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" id="confidence-fill"></div>
+                    </div>
+                    <div class="result-row">
+                        <p id="confidence-text"></p>
+                        <p id="gpu-badge" class="gpu-badge hidden">GPU Accelerated</p>
+                    </div>
+                    <div class="top-picks">
+                        <h4>Top predictions</h4>
+                        <div id="top-predictions" class="top-predictions"></div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <footer>
+            <p>Built for SVM-based image inference on the BUSI ultrasound dataset.</p>
+        </footer>
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

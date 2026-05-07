@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.git/
+.env
+venv/
+env/
+training/
+models/best_busi_model.pth
