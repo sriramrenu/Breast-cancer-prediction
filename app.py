@@ -103,7 +103,7 @@ if not os.path.exists("static"):
 async def read_index():
     return FileResponse("static/index.html")
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/", StaticFiles(directory="static"), name="static")
 
 if __name__ == "__main__":
     import uvicorn
