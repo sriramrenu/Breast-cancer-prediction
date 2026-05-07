@@ -1,6 +1,6 @@
-// TODO: Replace with your Hugging Face Space URL after deployment (e.g., 'https://<username>-<spacename>.hf.space')
-// Set to 'http://localhost:8000' for local testing
-const API_BASE_URL = 'http://localhost:8000';
+// Set to '' when hosting both frontend and backend on Hugging Face Spaces
+// Set to your Hugging Face URL (e.g. 'https://username-space.hf.space') when hosting frontend on Vercel
+const API_BASE_URL = '';
 
 document.addEventListener('DOMContentLoaded', () => {
     const uploadArea = document.getElementById('upload-area');
