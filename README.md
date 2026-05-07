@@ -9,28 +9,47 @@ pinned: false
 
 # Health Predict AI 🏥
 
-Image-only medical diagnosis demo using Kaggle-hosted breast histopathology data and a lightweight FastAPI image endpoint.
+An advanced Support Vector Machine (SVM) diagnostic tool for classifying Breast Ultrasound Images (Benign, Malignant, Normal).
 
-## What is kept
-- `training/kaggle_train_images.py` for Kaggle-based image training
-- `app.py` image upload and response endpoint
-- `static/` frontend for image analysis
+**Live Frontend (Vercel)**: *Add your Vercel URL here!*
+**Live API (Hugging Face)**: https://sriramrenu-breast-cancer-prediction.hf.space
 
-## Kaggle training
-Run the image trainer inside a Kaggle notebook or script after attaching the dataset:
+## Architecture
+This project uses a Hybrid Transfer Learning approach to make Support Vector Machines perform exceptionally well on image data:
+1. **ResNet18 Feature Extractor**: Converts raw pixels into a 512-dimensional numerical feature array.
+2. **SVM Classifier**: An `sklearn.svm.SVC` model that performs the final classification on the extracted features, achieving an accuracy of **91.14%**.
 
-```bash
-python training/kaggle_train_images.py
-```
+## How to Use the Hosted API
+You can interact with the cloud-hosted backend directly via REST API:
 
-The script downloads the dataset through KaggleHub, trains the image model, and saves `model_image.pth`.
-
-## API usage
 ```python
 import requests
 
-url = "http://localhost:8000/predict-image"
-files = {"file": ("scan.png", open("scan.png", "rb"), "image/png")}
+# The live Hugging Face Space API URL
+url = "https://sriramrenu-breast-cancer-prediction.hf.space/predict-image"
+
+# Upload your ultrasound image
+files = {"file": ("ultrasound.png", open("ultrasound.png", "rb"), "image/png")}
 response = requests.post(url, files=files)
+
 print(response.json())
 ```
+
+### Example API Response:
+```json
+{
+  "predicted_class": "malignant",
+  "confidence": 0.84,
+  "top_classes": [
+    {"class": "malignant", "prob": 0.84},
+    {"class": "benign", "prob": 0.12},
+    {"class": "normal", "prob": 0.04}
+  ]
+}
+```
+
+## Local Development
+To run this project locally:
+1. `pip install -r requirements.txt`
+2. `python app.py`
+3. Open `http://localhost:8000` in your browser.

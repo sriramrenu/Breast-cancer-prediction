@@ -1,6 +1,6 @@
 // Set to '' when hosting both frontend and backend on Hugging Face Spaces
 // Set to your Hugging Face URL (e.g. 'https://username-space.hf.space') when hosting frontend on Vercel
-const API_BASE_URL = '';
+const API_BASE_URL = 'https://sriramrenu-breast-cancer-prediction.hf.space';
 
 document.addEventListener('DOMContentLoaded', () => {
     const uploadArea = document.getElementById('upload-area');
